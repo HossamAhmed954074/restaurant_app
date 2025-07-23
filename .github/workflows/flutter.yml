@@ -40,13 +40,11 @@ jobs:
      
 
       # Conditional build for Android or iOS
-      - name: Build Android APK
-        if: matrix.platform == 'android'  # Only runs for Android
+      - name: Build  APK # Only runs for Android
         run: flutter build apk --release  # Use --release only for build commands
 
-      - name: Build iOS IPA
-        if: matrix.platform == 'ios'  # Only runs for iOS
-        run: flutter build ios --release --no-codesign  # Use --release only for build commands
+      - name: Build iOS    
+        run: flutter build ios --release   # Use --release only for build commands
 
       # Upload APK (Android)
       - name: Upload APK
