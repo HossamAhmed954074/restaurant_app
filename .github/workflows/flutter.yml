@@ -26,7 +26,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.8.1'  # Ensure Flutter version >= 3.8.1 (compatible with Dart >= 3.8.1)
 
       # Verify Flutter version and Dart SDK version
       - name: Verify Flutter and Dart versions
