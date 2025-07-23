@@ -1,4 +1,4 @@
-name: Flutter CI/CD
+name: Flutter CI/CD (Android and iOS)
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         platform: [android, ios]  # Run for both Android and iOS
@@ -21,22 +21,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Set up Flutter
+      # Set up Flutter with the correct version
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'  # Ensure the stable channel is used
-          flutter-version: '3.22.0'  # Specify a concrete version
+          flutter-version: '3.8.1'  # Ensure Flutter version >= 3.8.1 (compatible with Dart >= 3.8.1)
 
-      # Verify Flutter installation and version
-      - name: Verify Flutter version
-        run: flutter --version  # This ensures Flutter is installed and the version is detected
+      # Verify Flutter version and Dart SDK version
+      - name: Verify Flutter and Dart versions
+        run: |
+          flutter --version
+          dart --version  # Verify that the Dart SDK is the correct version
 
       # Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # Run tests (for both platforms)
+      # Run tests
       - name: Run tests
         run: flutter test
 
