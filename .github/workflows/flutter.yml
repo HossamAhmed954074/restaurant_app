@@ -1,4 +1,4 @@
-name: Flutter CI/CD (Android and iOS)
+name: Flutter CI/CD (Android Only)
 
 on:
   push:
@@ -11,10 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        platform: [android, ios]  # Run for both Android and iOS
 
     steps:
       # Checkout the code
@@ -37,27 +33,17 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-     
+      # Run tests (no --release flag for tests)
+      - name: Run tests
+        run: flutter test
 
-      # Conditional build for Android or iOS
-      - name: Build  APK # Only runs for Android
-        run: flutter build apk --release  # Use --release only for build commands
-
-      - name: Build iOS    
-        run: flutter build ios --release   # Use --release only for build commands
+      # Build the Android APK
+      - name: Build Android APK
+        run: flutter build apk --release  # Build the release APK
 
       # Upload APK (Android)
       - name: Upload APK
-        if: matrix.platform == 'android'
         uses: actions/upload-artifact@v4
         with:
           name: android-apk
           path: build/app/outputs/flutter-apk/app-release.apk
-
-      # Upload IPA (iOS)
-      - name: Upload IPA
-        if: matrix.platform == 'ios'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-ipa
-          path: build/ios/iphoneos/Runner.app
