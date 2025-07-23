@@ -1,0 +1,62 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        platform: [android, ios]  # Run for both Android and iOS
+
+    steps:
+      # Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Set up Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Run tests (for both platforms)
+      - name: Run tests
+        run: flutter test
+
+      # Conditional build for Android or iOS
+      - name: Build Android APK
+        if: matrix.platform == 'android'  # Only runs for Android
+        run: flutter build apk --release
+
+      - name: Build iOS IPA
+        if: matrix.platform == 'ios'  # Only runs for iOS
+        run: flutter build ios --release --no-codesign
+
+      # Upload APK (Android)
+      - name: Upload APK
+        if: matrix.platform == 'android'
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      # Upload IPA (iOS)
+      - name: Upload IPA
+        if: matrix.platform == 'ios'
+        uses: actions/upload-artifact@v2
+        with:
+          name: ios-ipa
+          path: build/ios/iphoneos/Runner.app
+
