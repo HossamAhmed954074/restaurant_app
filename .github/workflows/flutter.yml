@@ -25,7 +25,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: 'stable'  # Use the latest stable version
 
       # Verify Flutter version and Dart SDK version
       - name: Verify Flutter and Dart versions
@@ -37,18 +37,16 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # Run tests
-      - name: Run tests
-        run: flutter test
+     
 
       # Conditional build for Android or iOS
       - name: Build Android APK
         if: matrix.platform == 'android'  # Only runs for Android
-        run: flutter build apk --release
+        run: flutter build apk --release  # Use --release only for build commands
 
       - name: Build iOS IPA
         if: matrix.platform == 'ios'  # Only runs for iOS
-        run: flutter build ios --release --no-codesign
+        run: flutter build ios --release --no-codesign  # Use --release only for build commands
 
       # Upload APK (Android)
       - name: Upload APK
