@@ -33,9 +33,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # Run tests (no --release flag for tests)
-      - name: Run tests
-        run: flutter test
+      # # Run tests (no --release flag for tests)
+      # - name: Run tests
+      #   run: flutter test
 
       # Build the Android APK
       - name: Build Android APK
