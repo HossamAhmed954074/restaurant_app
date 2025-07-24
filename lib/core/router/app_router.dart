@@ -1,5 +1,7 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resturant_app/features/auth/view/screens/auth_screen.dart';
+import 'package:resturant_app/features/auth/view_model/cubit/auth_cubit.dart';
 import 'package:resturant_app/features/get_started/screens/get_started_screen.dart';
 import 'package:resturant_app/features/onboarding/screens/onboarding_screen.dart';
 
@@ -27,7 +29,10 @@ class AppRouter {
       GoRoute(
         path: kAuthScreen,
         builder: (context, state) {
-          return const AuthScreen();
+          return BlocProvider(
+            create: (context) => AuthCubit(),
+            child: const AuthScreen(),
+          );
         },
       ),
     ],

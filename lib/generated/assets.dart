@@ -11,5 +11,6 @@ class Assets {
   static const String onboardingOnboarding3 = 'assets/images/onboarding/onboarding3.png';
   static const String getStartedImage = 'assets/images/get_started/getStarted.png';
   static const String getStartedImage2 = 'assets/images/get_started/getstarted2.png';
+  static const String authBackGroundImage = 'assets/images/auth_screen.png';
 
 }
