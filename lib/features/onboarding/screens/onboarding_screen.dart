@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resturant_app/core/router/app_router.dart';
+import 'package:resturant_app/core/utils/styles/app_text_style.dart';
 import 'package:resturant_app/features/onboarding/widgets/intro_component.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../generated/assets.dart';
@@ -47,7 +48,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _onGetStarted() async {
-     GoRouter.of(context).pushReplacement(AppRouter.kGetStartedScreen);
+    GoRouter.of(context).pushReplacement(AppRouter.kGetStartedScreen);
     // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     // sharedPreferences.setBool('onboarding', true);
   }
@@ -88,13 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Center(
                   child: Text(
                     titles[currentPage],
-                    style: GoogleFonts.lora(
-                      textStyle: TextStyle(
-                        letterSpacing: .5,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    style: AppTextStyle.heading2,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -109,13 +104,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onPressed: _skip,
                       child: Text(
                         'Skip',
-                        style: GoogleFonts.lora(
-                          textStyle: TextStyle(
-                            letterSpacing: .5,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.red,
-                          ),
+                        style: AppTextStyle.buttonText.copyWith(
+                          color: Colors.red,
+                          letterSpacing: .5,
                         ),
                       ),
                     ),
@@ -132,21 +123,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   currentPage == pages.length - 1 ? 'Get Started' : 'Next',
                   style: currentPage == pages.length - 1
                       ? GoogleFonts.lora(
-                          textStyle: TextStyle(
-                            letterSpacing: .5,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          textStyle: AppTextStyle.buttonText.copyWith(
                             color: Colors.green,
                           ),
                         )
-                      : GoogleFonts.lora(
-                          textStyle: TextStyle(
-                            letterSpacing: .5,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue,
-                          ),
-                        ),
+                      : AppTextStyle.buttonText.copyWith(color: Colors.blue),
                 ),
               ),
             ),

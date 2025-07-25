@@ -25,6 +25,14 @@ class FirebaseFaliure {
         return 'This operation is sensitive and requires recent authentication.';
       case 'network-request-failed':
         return 'A network error has occurred.';
+      case 'invalid-verification-code':
+        return 'The verification code is invalid.';
+      case 'invalid-verification-id':
+        return 'The verification ID is invalid.';
+      case 'user-mismatch':
+        return 'The supplied credentials do not correspond to the previously signed in user.';
+      case 'credential-already-in-use':
+        return 'This credential is already associated with a different user account.';
       default:
         return 'Something went wrong.';
     }
