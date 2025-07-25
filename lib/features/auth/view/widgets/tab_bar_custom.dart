@@ -14,11 +14,11 @@ class TabBarCustomWidget extends StatelessWidget {
 
       indicator: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.red, Colors.orange, Colors.yellow],
+          colors: [Colors.redAccent, Colors.blueAccent, Colors.greenAccent],
         ),
       ),
-      labelColor: Colors.white,
-      unselectedLabelColor: Colors.white70,
+      labelColor: Colors.black,
+      unselectedLabelColor: Colors.orange,
       tabs: [
         Tab(text: 'LogIn'),
         Tab(text: 'Register'),

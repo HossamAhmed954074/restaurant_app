@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resturant_app/core/utils/widgets/show_circle_indecator.dart';
+import 'package:resturant_app/core/utils/widgets/show_snak_faluire.dart';
+import 'package:resturant_app/core/utils/widgets/show_snak_sucess.dart';
 import 'package:resturant_app/features/auth/view/widgets/auth_button_custom.dart';
 import 'package:resturant_app/features/auth/view/widgets/text_field_custom.dart';
 import 'package:resturant_app/features/auth/view_model/cubit/auth_cubit.dart';
@@ -29,11 +32,11 @@ class _RegisterBodyState extends State<RegisterBody> {
   }
 
   void _register() async {
-    // BlocProvider.of<AuthCubit>(context).register(
-    //   email: _emailController.text.trim(),
-    //   password: _passwordController.text.trim(),
-    //   name: _nameController.text.trim(),
-    // );
+    BlocProvider.of<AuthCubit>(context).register(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+      name: _nameController.text.trim(),
+    );
   }
 
   void clear() {
@@ -48,11 +51,11 @@ class _RegisterBodyState extends State<RegisterBody> {
       listener: (context, state) {
         
         if(state is AuthSuccess){
-         // showSnakBarSuccess(context, 'Register Success');
+          showSnakBarSuccess(context, 'Register Success');
           clear();
         }
          if(state is AuthFailure){
-         // showSnakBarFaluire(context, state.message.faliure());
+          showSnakBarFaluire(context, state.message.faliure());
         }
        
       },
@@ -65,6 +68,7 @@ class _RegisterBodyState extends State<RegisterBody> {
               child: Form(
                 key: _formKey,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                  
                     TextFieldCustomWidget(
@@ -72,17 +76,17 @@ class _RegisterBodyState extends State<RegisterBody> {
                       controller: _nameController,
                     ),
             
-                    SizedBox(height: 15),
+                    SizedBox(height: 10),
                     TextFieldCustomWidget(
                       hintText: 'Email',
                       controller: _emailController,
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 10),
                     TextFieldCustomWidget(
                       hintText: 'Password',
                       controller: _passwordController,
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                     
                     AuthButtonCustomWidget(
                       text: 'Register',
@@ -97,8 +101,8 @@ class _RegisterBodyState extends State<RegisterBody> {
                 ),
               ),
             ),
-          //  if(state is AuthLoading)
-           // circleIndeactorCustom(context),
+           if(state is AuthLoading)
+           circleIndeactorCustom(context),
           ],
         );
       },

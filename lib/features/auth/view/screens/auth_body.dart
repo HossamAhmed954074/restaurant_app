@@ -37,19 +37,19 @@ class _AuthBodyState extends State<AuthBody>
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(Assets.authBackGroundImage),
+              image: AssetImage(Assets.imagesAuth),
               fit: BoxFit.fill,
             ),
           ),
         ),
-        Container(color: Colors.black.withAlpha(-200)),
+        Container(color: Colors.grey.withAlpha(-200)),
         Center(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+              filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
               child: Container(
-                height: 350,
+                height: 400,
                 width: 300,
                 decoration: BoxDecoration(
                   color: Colors.black12.withOpacity(0.2),
@@ -60,6 +60,7 @@ class _AuthBodyState extends State<AuthBody>
                   ),
                 ),
                 child: Column(
+                  
                   children: [
                     TabBarCustomWidget(tabController: _tabController),
                     Expanded(

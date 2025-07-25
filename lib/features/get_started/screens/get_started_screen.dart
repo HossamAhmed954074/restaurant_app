@@ -16,11 +16,11 @@ class GetStartedScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              Assets.getStartedImage2,
+              Assets.getStartedGetstarted2,
               height: 150,
               fit: BoxFit.contain,
             ),
-            Image.asset(Assets.getStartedImage, height: 300),
+            Image.asset(Assets.getStartedGetStarted, height: 300),
             SizedBox(height: 32),
             Text(
               'Your New Food Buddy.',

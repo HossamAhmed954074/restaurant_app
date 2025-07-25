@@ -38,6 +38,26 @@ class AppTextStyle {
     letterSpacing: 0.5,
   );
   
-
+ static final TextStyle menuItemButton = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+  );
   
+  static final TextStyle menuItemTitle = GoogleFonts.poppins(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+  );
+  
+  static final TextStyle menuItemDescription = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.5,
+  );
+   static final TextStyle menuItemPrice = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+  );
 }

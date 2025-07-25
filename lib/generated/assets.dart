@@ -2,15 +2,26 @@
 class Assets {
   Assets._();
 
+  static const String categoryIconBurger = 'assets/images/category_icon/burger.png';
+  static const String categoryIconDesert = 'assets/images/category_icon/desert.png';
+  static const String categoryIconDrinks = 'assets/images/category_icon/drinks.png';
+  static const String categoryIconPasta = 'assets/images/category_icon/pasta.png';
+  static const String categoryIconPizza = 'assets/images/category_icon/pizza.png';
+  static const String categoryIconSalad = 'assets/images/category_icon/salad.png';
+  static const String categoryIconSandawith = 'assets/images/category_icon/sandawith.png';
+  static const String categoryIconSushi = 'assets/images/category_icon/sushi.png';
+  static const String getStartedGetStarted = 'assets/images/get_started/getStarted.png';
+  static const String getStartedGetstarted2 = 'assets/images/get_started/getstarted2.png';
+  static const String imagesAuth = 'assets/images/auth.png';
+  static const String imagesBurger = 'assets/images/burger.png';
+  static const String imagesMenuImage = 'assets/images/menu_image.png';
+  static const String imagesProfileImage = 'assets/images/profile_image.png';
   static const String logoDarkMoodLogo = 'assets/images/logo/dark_mood_logo.png';
   static const String logoDarkMoodLogo12 = 'assets/images/logo/dark_mood_logo12.png';
   static const String logoLightMoodLogo = 'assets/images/logo/light_mood_logo.png';
   static const String logoLightMoodLogo12RemovebgPreview = 'assets/images/logo/light_mood_logo_12-removebg-preview.png';
   static const String onboardingOnboarding1 = 'assets/images/onboarding/onboarding1.png';
   static const String onboardingOnboarding2 = 'assets/images/onboarding/onboarding2.png';
-  static const String onboardingOnboarding3 = 'assets/images/onboarding/onboarding3.png';
-  static const String getStartedImage = 'assets/images/get_started/getStarted.png';
-  static const String getStartedImage2 = 'assets/images/get_started/getstarted2.png';
-  static const String authBackGroundImage = 'assets/images/auth_screen.png';
+  static const String onboardingOnboarding3 = 'assets/images/onboarding/onboarding_3.png';
 
 }

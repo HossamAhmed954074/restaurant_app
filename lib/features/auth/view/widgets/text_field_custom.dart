@@ -40,7 +40,7 @@ class _TextFieldCustomWidgetState extends State<TextFieldCustomWidget> {
       controller: widget.controller,
       obscureText: widget.hintText == 'Password' ? obscureText : false,
       cursorColor: Colors.brown,
-      style: TextStyle(color: Colors.white),
+      style: TextStyle(color: Colors.black),
       decoration: InputDecoration(
         suffixIcon: widget.hintText == 'Password' ||
                 widget.hintText == 'Confirm Password' ||
@@ -53,7 +53,7 @@ class _TextFieldCustomWidgetState extends State<TextFieldCustomWidget> {
                           obscureText = !obscureText;
                         });
                       },
-                      icon: Icon(Icons.visibility, color: Colors.white),
+                      icon: Icon(Icons.visibility, color: Colors.black),
                     )
                   : IconButton(
                       onPressed: () {
@@ -61,16 +61,16 @@ class _TextFieldCustomWidgetState extends State<TextFieldCustomWidget> {
                         obscureText = !obscureText;
                         });
                       },
-                      icon: Icon(Icons.visibility_off, color: Colors.white),
+                      icon: Icon(Icons.visibility_off, color: Colors.black),
                     )
             : SizedBox.shrink(),
         hintText: widget.hintText,
-        hintStyle: TextStyle(color: Colors.white),
+        hintStyle: TextStyle(color: Colors.black),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: Colors.black),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: Colors.black),
         ),
       ),
     );

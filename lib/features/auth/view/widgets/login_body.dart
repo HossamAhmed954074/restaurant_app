@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:resturant_app/core/utils/widgets/show_circle_indecator.dart';
+import 'package:resturant_app/core/utils/widgets/show_snak_faluire.dart';
+import 'package:resturant_app/core/utils/widgets/show_snak_sucess.dart';
 import 'package:resturant_app/features/auth/view/widgets/auth_button_custom.dart';
-import 'package:resturant_app/features/auth/view/widgets/icon_button_custom.dart';
+
 import 'package:resturant_app/features/auth/view/widgets/text_field_custom.dart';
 import 'package:resturant_app/features/auth/view_model/cubit/auth_cubit.dart';
 
+import '../../../../core/router/app_router.dart';
 
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
@@ -20,7 +23,6 @@ class _LoginBodyState extends State<LoginBody> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-
   @override
   void dispose() {
     super.dispose();
@@ -30,38 +32,34 @@ class _LoginBodyState extends State<LoginBody> {
   }
 
   void logIn() {
-    // BlocProvider.of<AuthCubit>(context).logIn(
-    //   email: emailController.text.trim(),
-    //   password: passwordController.text.trim(),
-    // );
-  }
-
-   googleAuth() {
-    //  BlocProvider.of<AuthCubit>(context).googleAuth();
+    BlocProvider.of<AuthCubit>(context).logIn(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
   }
 
   void clear() {
     emailController.clear();
     passwordController.clear();
   }
-void navigateTo() async{
-  await Future.delayed(const Duration(seconds: 1));
-  if (mounted) {
-    // GoRouter.of(context).go(AppRouter.kNavigationBar);
+
+  void navigateTo() async {
+    await Future.delayed(const Duration(seconds: 1));
+    if (mounted) {
+      GoRouter.of(context).go(AppRouter.kBottomNavBarScreen);
+    }
   }
-}
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is AuthSuccess)  {
-         // showSnakBarSuccess(context, 'Login Success');
-          clear();
+        if (state is AuthSuccess) {
+          showSnakBarSuccess(context, 'Login Success');
           navigateTo();
         } else if (state is AuthFailure) {
-          //showSnakBarFaluire(context, state.message.faliure());
-        } else if (state is GoogleAuthFailure) {
-         // showSnakBarFaluire(context, state.message);
+          showSnakBarFaluire(context, state.message.faliure());
+          clear();
         }
       },
       builder: (context, state) {
@@ -84,11 +82,11 @@ void navigateTo() async{
                       controller: passwordController,
                     ),
                     SizedBox(height: 10),
-                  //  CheckBoxRememberMe(onChanged: (p0) {}),
+                    //  CheckBoxRememberMe(onChanged: (p0) {}),
                     SizedBox(height: 30),
                     AuthButtonCustomWidget(
-                      text:'LogIN',
-                      onPressed: () {            
+                      text: 'LogIN',
+                      onPressed: () {
                         if (formKey.currentState!.validate()) {
                           logIn();
                         }
@@ -98,7 +96,7 @@ void navigateTo() async{
                 ),
               ),
             ),
-          //  if (state is AuthLoading) circleIndeactorCustom(context),
+              if (state is AuthLoading) circleIndeactorCustom(context),
           ],
         );
       },

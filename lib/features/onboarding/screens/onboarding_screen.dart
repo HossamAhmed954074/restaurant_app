@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:resturant_app/core/router/app_router.dart';
 import 'package:resturant_app/core/utils/styles/app_text_style.dart';
 import 'package:resturant_app/features/onboarding/widgets/intro_component.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../generated/assets.dart';
 
@@ -49,8 +50,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void _onGetStarted() async {
     GoRouter.of(context).pushReplacement(AppRouter.kGetStartedScreen);
-    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    // sharedPreferences.setBool('onboarding', true);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('onboarding', true);
   }
 
   @override
@@ -63,6 +64,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        top: false,
+        left: false,
         child: Stack(
           children: [
             PageView.builder(
@@ -79,17 +82,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               itemBuilder: (context, index) => pages[index],
               itemCount: pages.length,
             ),
-
             Positioned(
               left: 0,
               right: 0,
-              bottom: 110,
+              bottom: 70,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Center(
                   child: Text(
                     titles[currentPage],
-                    style: AppTextStyle.heading2,
+                    style: AppTextStyle.heading2.copyWith(color: Colors.black),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -98,7 +100,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             currentPage != pages.length - 1
                 ? Positioned(
-                    bottom: 30,
+                    bottom: 20,
                     left: 20,
                     child: TextButton(
                       onPressed: _skip,
@@ -113,7 +115,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   )
                 : SizedBox.shrink(),
             Positioned(
-              bottom: 30,
+              bottom: 20,
               right: 20,
               child: TextButton(
                 onPressed: currentPage == pages.length - 1
@@ -135,7 +137,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Positioned(
               left: 0,
               right: 0,
-              bottom: 50,
+              bottom: 40,
               child: Center(
                 child: SmoothPageIndicator(
                   controller: _pageController,

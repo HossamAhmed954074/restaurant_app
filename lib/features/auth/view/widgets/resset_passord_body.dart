@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resturant_app/core/utils/widgets/show_circle_indecator.dart';
+import 'package:resturant_app/core/utils/widgets/show_snak_faluire.dart';
+import 'package:resturant_app/core/utils/widgets/show_snak_sucess.dart';
 
 import 'package:resturant_app/features/auth/view/widgets/auth_button_custom.dart';
 import 'package:resturant_app/features/auth/view/widgets/text_field_custom.dart';
@@ -16,9 +19,9 @@ class _RessetPassordState extends State<RessetPassord> {
   final TextEditingController _emailController = TextEditingController();
 
   resetPassowrd() async {
-    // BlocProvider.of<AuthCubit>(
-    //   context,
-    // ).resetPassword(email: _emailController.text);
+    BlocProvider.of<AuthCubit>(
+      context,
+    ).resetPassword(email: _emailController.text);
   }
 
   @override
@@ -33,13 +36,13 @@ class _RessetPassordState extends State<RessetPassord> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          // showSnakBarSuccess(
-          //   context,
-          //   'Check Your Email & Spam Emails to Resset Password',
-          // );
+          showSnakBarSuccess(
+            context,
+            'Check Your Email & Spam Emails to Resset Password',
+          );
         }
         if (state is AuthFailure) {
-        //  showSnakBarFaluire(context, state.message.message);
+         showSnakBarFaluire(context, state.message.message);
         }
       },
       builder: (context, state) {
@@ -75,7 +78,7 @@ class _RessetPassordState extends State<RessetPassord> {
                 ],
               ),
             ),
-          //  if (state is AuthLoading) circleIndeactorCustom(context),
+            if (state is AuthLoading) circleIndeactorCustom(context),
           ],
         );
       },

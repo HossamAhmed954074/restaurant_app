@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "151754348145",
+    "project_id": "restaurant-app-fc8b5",
+    "storage_bucket": "restaurant-app-fc8b5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151754348145:android:f8307eda32132a2483edd0",
+        "android_client_info": {
+          "package_name": "com.recoGenie.resturant_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO61d-I9lI1VzXJCcJ_TUSJWObl7mvPWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

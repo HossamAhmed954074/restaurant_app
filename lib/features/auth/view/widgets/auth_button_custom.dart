@@ -15,7 +15,7 @@ class AuthButtonCustomWidget extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          gradient: LinearGradient(colors: [Colors.red, Colors.orange]),
+          gradient: LinearGradient(colors: [Colors.red, Colors.green, Colors.blue]),
       
         ),
         child: Center(child: Text(text,)),

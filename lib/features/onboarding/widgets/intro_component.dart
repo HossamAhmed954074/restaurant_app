@@ -9,7 +9,7 @@ class IntroComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: Image.asset(imagePath,)),
+        Expanded(child: Image.asset(imagePath, fit: BoxFit.contain)),
       ],
     );
   }
