@@ -31,9 +31,7 @@ class MenuHeaderCustomWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-
-              children: [
-                // Add some space on the left
+              children: [      
                 SizedBox(
                   width: 60,
                   height: 60,
@@ -43,14 +41,13 @@ class MenuHeaderCustomWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 90,
-                  height: 90,
+                  width: 100,
+                  height: 100,
                   child: Image.asset(
                     Assets.imagesMenuImage,
                     fit: BoxFit.contain,
                   ),
                 ),
-
                 Row(
                   children: [
                     IconButton(

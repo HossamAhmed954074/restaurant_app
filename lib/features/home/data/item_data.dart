@@ -18,6 +18,21 @@ class Itemdata{
     required this.rating,
     required this.time,
   });
+
+
+
+  factory Itemdata.fromFirestore(Map<String, dynamic> data, String category) {
+    return Itemdata(
+      title: data['title'] ?? '',
+      imageCategory: 'https://drive.google.com/uc?export=view&id=${data['imageCategory']}' ?? '',
+      description: data['description'] ?? '',
+      price: data['price']?.toDouble() ?? 0.0,
+      category: category,
+      imageFordetails: data['imageFordetails'] ?? '',
+      rating: data['rating'] ?? '',
+      time: data['time'] ?? '',
+    );
+  }
 }
 
 

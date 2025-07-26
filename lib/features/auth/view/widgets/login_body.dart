@@ -5,10 +5,8 @@ import 'package:resturant_app/core/utils/widgets/show_circle_indecator.dart';
 import 'package:resturant_app/core/utils/widgets/show_snak_faluire.dart';
 import 'package:resturant_app/core/utils/widgets/show_snak_sucess.dart';
 import 'package:resturant_app/features/auth/view/widgets/auth_button_custom.dart';
-
 import 'package:resturant_app/features/auth/view/widgets/text_field_custom.dart';
 import 'package:resturant_app/features/auth/view_model/cubit/auth_cubit.dart';
-
 import '../../../../core/router/app_router.dart';
 
 class LoginBody extends StatefulWidget {
@@ -44,7 +42,6 @@ class _LoginBodyState extends State<LoginBody> {
   }
 
   void navigateTo() async {
-    await Future.delayed(const Duration(seconds: 1));
     if (mounted) {
       GoRouter.of(context).go(AppRouter.kBottomNavBarScreen);
     }
