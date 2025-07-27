@@ -9,7 +9,9 @@ import 'package:resturant_app/core/services/auth_services.dart';
 import 'package:resturant_app/features/auth/view/screens/auth_screen.dart';
 import 'package:resturant_app/features/auth/view_model/cubit/auth_cubit.dart';
 import 'package:resturant_app/features/bottom_nave/screens/bottom_nav.dart';
+import 'package:resturant_app/features/details/presentation/view/screens/item_details_screen.dart';
 import 'package:resturant_app/features/get_started/screens/get_started_screen.dart';
+import 'package:resturant_app/features/home/data/item_data.dart';
 import 'package:resturant_app/features/onboarding/screens/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +23,7 @@ class AppRouter {
   static const String kGetStartedScreen = '/get-started';
   static const String kAuthScreen = '/auth';
   static const String kBottomNavBarScreen = '/bottom-nav-bar';
+  static const String kMenuDetailsScreen = '/menu-details';
 
   // SharedPreferences keys
   static const String _onboardingKey = 'onboarding';
@@ -99,6 +102,13 @@ class AppRouter {
         path: kOnboardingScreen,
         name: 'onboarding',
         builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: kMenuDetailsScreen,
+        name: 'menu-details',
+        builder: (context, state) => ItemDetailsScreen(
+          itemData: state.extra as Itemdata, // Ensure extra is of type Itemdata
+        ),
       ),
       GoRoute(
         path: kGetStartedScreen,
