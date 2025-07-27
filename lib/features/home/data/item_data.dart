@@ -28,7 +28,7 @@ class Itemdata{
       description: data['description'] ?? '',
       price: data['price']?.toDouble() ?? 0.0,
       category: category,
-      imageFordetails: data['imageFordetails'] ?? '',
+      imageFordetails: 'https://drive.google.com/uc?export=view&id=${data['imageFordetails']}',
       rating: data['rating'] ?? '',
       time: data['time'] ?? '',
     );

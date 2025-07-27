@@ -121,7 +121,6 @@ class AuthServicess {
 
   deleteUserAndField() {
     firestore.collection('users').doc(auth.currentUser!.uid).delete();
-
   }
 
  

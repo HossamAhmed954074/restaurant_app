@@ -20,7 +20,7 @@ class ItemsMenuGridViewBody extends StatelessWidget {
       scrollDirection: Axis.vertical,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 1.122 / 1.65555,
+        childAspectRatio: 1 / 1.65555,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
       ),

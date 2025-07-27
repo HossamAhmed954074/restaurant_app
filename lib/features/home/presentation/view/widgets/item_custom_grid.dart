@@ -37,25 +37,28 @@ class ItemCustomWidgetGridView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-              child: CachedNetworkImage(
-                imageUrl: itemData.imageCategory,
-                imageBuilder: (context, imageProvider) => Container(
-                  height: 150,
-                  decoration: BoxDecoration(
-                   // borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.contain,
+            Hero(
+              tag: itemData.imageFordetails,
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                child: CachedNetworkImage(
+                  imageUrl: itemData.imageCategory,
+                  imageBuilder: (context, imageProvider) => Container(
+                    height: 150,
+                    decoration: BoxDecoration(
+                     // borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
+                  placeholder: (context, url) => Center(
+                    child: circleIndeactorCustom(context, Colors.redAccent)
+                  ),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
-                placeholder: (context, url) => Center(
-                  child: circleIndeactorCustom(context, Colors.redAccent)
-                ),
-                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
             const SizedBox(height: 10),

@@ -10,9 +10,7 @@ class ItemMenuListViewBody extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       physics: const BouncingScrollPhysics(),
-
       itemCount: itemData.length,
-
       itemBuilder: (context, index) {
         return ItemCustomWidgetListView(itemdata: itemData[index]);
       },

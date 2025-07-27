@@ -10,6 +10,7 @@ import 'package:resturant_app/features/auth/view/screens/auth_screen.dart';
 import 'package:resturant_app/features/auth/view_model/cubit/auth_cubit.dart';
 import 'package:resturant_app/features/bottom_nave/screens/bottom_nav.dart';
 import 'package:resturant_app/features/details/presentation/view/screens/item_details_screen.dart';
+import 'package:resturant_app/features/details/presentation/view_model/cubit/order_cubit.dart';
 import 'package:resturant_app/features/get_started/screens/get_started_screen.dart';
 import 'package:resturant_app/features/home/data/item_data.dart';
 import 'package:resturant_app/features/onboarding/screens/onboarding_screen.dart';
@@ -106,9 +107,13 @@ class AppRouter {
       GoRoute(
         path: kMenuDetailsScreen,
         name: 'menu-details',
-        builder: (context, state) => ItemDetailsScreen(
-          itemData: state.extra as Itemdata, // Ensure extra is of type Itemdata
-        ),
+        builder: (context, state) {
+          final itemData = state.extra as Itemdata;
+          return BlocProvider(
+            create: (context) => OrderCubit(),
+            child: ItemDetailsScreen(itemData: itemData),
+          );
+        },
       ),
       GoRoute(
         path: kGetStartedScreen,

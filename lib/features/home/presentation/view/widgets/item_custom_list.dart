@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resturant_app/core/router/app_router.dart';
 import 'package:resturant_app/core/utils/styles/app_text_style.dart';
+import 'package:resturant_app/core/utils/widgets/show_circle_indecator.dart';
 import 'package:resturant_app/features/home/data/item_data.dart';
 
 class ItemCustomWidgetListView extends StatelessWidget {
@@ -12,10 +13,9 @@ class ItemCustomWidgetListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).push(
-          AppRouter.kMenuDetailsScreen,
-          extra: itemdata,
-        );
+        GoRouter.of(
+          context,
+        ).push(AppRouter.kMenuDetailsScreen, extra: itemdata);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -39,10 +39,24 @@ class ItemCustomWidgetListView extends StatelessWidget {
               height: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(itemdata.imageCategory),
-                  fit: BoxFit.contain,
+              ),
+              child: CachedNetworkImage(
+                imageUrl: itemdata.imageCategory,
+                imageBuilder: (context, imageProvider) => Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    // borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 ),
+                placeholder: (context, url) => Center(
+                  child: circleIndeactorCustom(context, Colors.redAccent),
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
             const SizedBox(width: 10),
@@ -50,14 +64,44 @@ class ItemCustomWidgetListView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    itemdata.title,
-                    style: AppTextStyle.menuItemTitle.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  Row(
+                    children: [
+                      Text(
+                        itemdata.title,
+                        style: AppTextStyle.menuItemTitle.copyWith(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      // const Spacer(),
+                      // SizedBox(
+                      //   width: 35,
+                      //   height: 35,
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       GoRouter.of(context).push(
+                      //         AppRouter.kMenuDetailsScreen,
+                      //         extra: itemdata,
+                      //       );
+                      //     },
+                      //     child: Container(
+                      //       decoration: BoxDecoration(
+                      //         color: Colors.orangeAccent,
+                      //         borderRadius: BorderRadius.circular(20),
+                      //       ),
+                      //       child: Center(
+                      //         child: Icon(
+                      //           Icons.arrow_forward,
+                      //           color: Colors.white,
+                      //           size: 20,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
                   ),
                   const SizedBox(height: 5),
                   Text(
@@ -99,31 +143,6 @@ class ItemCustomWidgetListView extends StatelessWidget {
                           const SizedBox(width: 5),
                           Text(itemdata.time),
                         ],
-                      ),
-                      SizedBox(
-                        width: 35,
-                        height: 35,
-                        child: InkWell(
-                          onTap: () {
-                            GoRouter.of(context).push(
-                              AppRouter.kMenuDetailsScreen,
-                              extra: itemdata,
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.orangeAccent,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        ),
                       ),
                     ],
                   ),
