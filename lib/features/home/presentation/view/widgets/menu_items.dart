@@ -4,6 +4,7 @@ import 'package:resturant_app/core/utils/widgets/show_circle_indecator.dart';
 import 'package:resturant_app/core/utils/widgets/show_snak_faluire.dart';
 import 'package:resturant_app/features/home/data/item_data.dart';
 import 'package:resturant_app/features/home/presentation/view/widgets/items_grid_body.dart';
+import 'package:resturant_app/features/home/presentation/view/widgets/items_list_body.dart';
 import 'package:resturant_app/features/home/presentation/view_model/cubit/home_cubit.dart';
 
 class MenuItemsByCategory extends StatefulWidget {
@@ -40,7 +41,8 @@ class _MenuItemsByCategoryState extends State<MenuItemsByCategory> {
         return Stack(
           children: [
             if (categoryItemData.isNotEmpty)
-              if (widget.isListOrGrid) Center(child: Text('List View')),
+              if (widget.isListOrGrid)
+                ItemMenuListViewBody(itemData: categoryItemData),
             if (!widget.isListOrGrid)
               ItemsMenuGridViewBody(categoryItemData: categoryItemData),
 
@@ -52,3 +54,7 @@ class _MenuItemsByCategoryState extends State<MenuItemsByCategory> {
     );
   }
 }
+
+
+
+
