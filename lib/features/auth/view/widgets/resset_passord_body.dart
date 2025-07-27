@@ -42,7 +42,8 @@ class _RessetPassordState extends State<RessetPassord> {
           );
         }
         if (state is AuthFailure) {
-         showSnakBarFaluire(context, state.message.message);
+         showSnakBarFaluire(context, state.message.userFriendlyMessage);
+          // showSnakBarFaluire(context, state.message.failure());
         }
       },
       builder: (context, state) {

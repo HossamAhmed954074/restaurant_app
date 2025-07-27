@@ -45,7 +45,7 @@ class _AlertDialogCustomWidgetState extends State<AlertDialogCustomWidget> {
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is ProfileReSetPassowrdFailure) {
-          showSnakBarFaluire(context, state.message.message);
+          showSnakBarFaluire(context, state.message.userFriendlyMessage);
         }
         if (state is ProfileResetPassowrdSuccess) {
           showSnakBarSuccess(context, 'Password changed successfully');

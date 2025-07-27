@@ -58,7 +58,7 @@ class _AlertDaialogCustomDeleteAccountState
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is ProfileDeleteAccountFailure) {
-          showSnakBarFaluire(context, state.message.message);
+          showSnakBarFaluire(context, state.message.userFriendlyMessage);
         }
         if (state is ProfileDeleteAccountSuccess) {
           showSnakBarSuccess(context, 'Account deleted successfully');

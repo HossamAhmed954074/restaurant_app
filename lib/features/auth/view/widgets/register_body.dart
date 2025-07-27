@@ -55,7 +55,7 @@ class _RegisterBodyState extends State<RegisterBody> {
           clear();
         }
          if(state is AuthFailure){
-          showSnakBarFaluire(context, state.message.faliure());
+          showSnakBarFaluire(context, state.message.userFriendlyMessage);
         }
        
       },

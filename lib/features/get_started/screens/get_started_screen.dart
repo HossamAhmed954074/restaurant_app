@@ -21,7 +21,7 @@ class GetStartedScreen extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             Image.asset(Assets.getStartedGetStarted, height: 300),
-            SizedBox(height: 32),
+            SizedBox(height: 40),
             Text(
               'Your New Food Buddy.',
               style: GoogleFonts.poppins(
@@ -29,10 +29,12 @@ class GetStartedScreen extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Text(
-              'Discover, order, and enjoy meals anytime, anywhere.',
-              style: GoogleFonts.lobster(fontSize: 18),
-              textAlign: TextAlign.center,
+            Center(
+              child: Text(
+                'Discover, order, and enjoy meals anytime, anywhere.',
+                style: GoogleFonts.lobster(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
             ),
             SizedBox(height: 32),
             InkWell(

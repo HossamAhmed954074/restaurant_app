@@ -38,7 +38,7 @@ class _AlertDaialogCustomUpdateUserNameState
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is ProfileResetUserNameFailure) {
-          showSnakBarFaluire(context, state.message.message);
+          showSnakBarFaluire(context, state.message.userFriendlyMessage);
         }
         if (state is ProfileResetUserNameSuccess) {
           showSnakBarSuccess(context, 'Username updated successfully');

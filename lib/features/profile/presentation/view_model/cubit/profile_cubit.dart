@@ -30,7 +30,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
       emit(ProfileResetPassowrdSuccess());
     } on FirebaseAuthException catch (e) {
-      emit(ProfileReSetPassowrdFailure(FirebaseFaliure(e.code)));
+      emit(ProfileReSetPassowrdFailure(FirebaseFailure.fromFirebaseAuth(e)));
     }
   }
 
@@ -39,8 +39,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await auth.updateUserName(name: newUserName);
       emit(ProfileResetUserNameSuccess());
-    } on FirebaseException catch (e) {
-      emit(ProfileResetUserNameFailure(FirebaseFaliure(e.code)));
+    } on FirebaseAuthException catch (e) {
+      emit(ProfileResetUserNameFailure(FirebaseFailure.fromFirebaseAuth(e)));
     }
   }
 
@@ -49,8 +49,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await auth.deleteAccount(email: email, password: password);
       emit(ProfileDeleteAccountSuccess());
-    } on FirebaseException catch (e) {
-      emit(ProfileDeleteAccountFailure(FirebaseFaliure(e.code)));
+    } on FirebaseAuthException catch (e) {
+      emit(ProfileDeleteAccountFailure(FirebaseFailure.fromFirebaseAuth(e)));
     }
   }
 }

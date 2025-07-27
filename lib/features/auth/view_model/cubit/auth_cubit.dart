@@ -19,7 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
       await authServices.registerUser(email: email, password: password, name: name);
       emit(AuthSuccess());
     }on FirebaseAuthException catch(e){
-      emit(AuthFailure(FirebaseFaliure(e.code)));
+      emit(AuthFailure(FirebaseFailure.fromFirebaseAuth(e)));
     }
   }
 
@@ -29,7 +29,7 @@ class AuthCubit extends Cubit<AuthState> {
       await authServices.loginUser(email: email, password: password);
       emit(AuthSuccess());
     }on FirebaseAuthException catch(e){
-      emit(AuthFailure(FirebaseFaliure(e.code)));
+      emit(AuthFailure(FirebaseFailure.fromFirebaseAuth(e)));
     }
   }
 
@@ -39,7 +39,7 @@ class AuthCubit extends Cubit<AuthState> {
       await authServices.resetPassword(email);
       emit(AuthSuccess());
     }on FirebaseAuthException catch(e){
-      emit(AuthFailure(FirebaseFaliure(e.code)));
+      emit(AuthFailure(FirebaseFailure.fromFirebaseAuth(e)));
     }
   }
 

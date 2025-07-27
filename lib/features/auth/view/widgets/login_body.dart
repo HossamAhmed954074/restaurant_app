@@ -55,7 +55,7 @@ class _LoginBodyState extends State<LoginBody> {
           showSnakBarSuccess(context, 'Login Success');
           navigateTo();
         } else if (state is AuthFailure) {
-          showSnakBarFaluire(context, state.message.faliure());
+          showSnakBarFaluire(context, state.message.userFriendlyMessage);
           clear();
         }
       },

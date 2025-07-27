@@ -15,5 +15,7 @@ List<CategoryItemData> categoryItems = [
   CategoryItemData(title: 'Salad', imageCategory: Assets.categoryIconSalad),
   CategoryItemData(title: 'Dessert', imageCategory: Assets.categoryIconDesert),
   CategoryItemData(title: 'Drinks', imageCategory: Assets.categoryIconDrinks),
+  CategoryItemData(title: 'Pasta', imageCategory: Assets.categoryIconPasta),
+  CategoryItemData(title: 'sandwich', imageCategory: Assets.categoryIconSandawith),
 ];
 
