@@ -60,7 +60,7 @@ class _BottomNavBarState extends State<BottomNavBar>
       return;
     }
 
-    // Haptic feedback
+
     HapticFeedback.selectionClick();
 
     setState(() {
@@ -104,6 +104,7 @@ class _BottomNavBarState extends State<BottomNavBar>
   void dispose() {
     _pageController.dispose();
     super.dispose();
+
   }
 
   @override

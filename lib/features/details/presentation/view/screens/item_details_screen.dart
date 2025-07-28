@@ -94,7 +94,9 @@ class _ItemDetailsBodyState extends State<ItemDetailsBody> {
   void _preloadImage() {
     if (widget.itemData.imageFordetails.isNotEmpty) {
       precacheImage(
-        CachedNetworkImageProvider(widget.itemData.imageFordetails),
+        CachedNetworkImageProvider(
+          'https://drive.google.com/uc?export=view&id=${widget.itemData.imageFordetails}',
+        ),
         context,
       ).catchError((error) {
         log('Error preloading image: $error', name: 'ItemDetailsScreen');

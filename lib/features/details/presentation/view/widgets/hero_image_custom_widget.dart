@@ -17,7 +17,7 @@ class HeroImageCustomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: itemData.imageFordetails,
+      tag: itemData.imageCategory,
       child: Container(
         key: widgetKey,
         width: double.infinity,
@@ -36,7 +36,7 @@ class HeroImageCustomWidget extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: CachedNetworkImage(
-            imageUrl: itemData.imageFordetails,
+            imageUrl: 'https://drive.google.com/uc?export=view&id=${itemData.imageFordetails}',
             fit: BoxFit.contain,
             placeholder: (context, url) => Container(
               color: Colors.grey[100],

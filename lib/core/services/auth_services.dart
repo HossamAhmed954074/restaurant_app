@@ -61,7 +61,6 @@ class AuthServicess {
 
     await firestore.collection('users').doc(auth.currentUser!.uid).set({
       'userName': name,
-      'score': 0,
       'email': email,
       'uid': auth.currentUser!.uid,
       'createdAt': DateTime.now(),
