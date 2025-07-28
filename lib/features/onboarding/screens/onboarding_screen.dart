@@ -364,7 +364,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             child: SlideTransition(
               position: _slideAnimation,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+               // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Title
                   Text(
@@ -378,13 +378,13 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     textAlign: TextAlign.center,
                   ),
 
-                  SizedBox(height: isTablet ? 16 : 12),
+                  SizedBox(height: isTablet ? 16 : 0),
 
                   // Subtitle
                   Text(
                     data.subtitle,
                     style: GoogleFonts.poppins(
-                      fontSize: isTablet ? 18 : 16,
+                      fontSize: isTablet ? 18 : 14,
                       fontWeight: FontWeight.w600,
                       color: data.secondaryColor,
                       height: 1.3,
@@ -392,7 +392,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     textAlign: TextAlign.center,
                   ),
 
-                  SizedBox(height: isTablet ? 20 : 16),
+                  SizedBox(height: isTablet ? 20 : 10),
 
                   // Description
                   Container(
@@ -426,7 +426,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         children: [
           // Page indicator
           Container(
-            margin: const EdgeInsets.only(bottom: 30),
+            margin: const EdgeInsets.only(bottom: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(

@@ -6,6 +6,7 @@ class OrderData {
   final double price;
   final int quantity;
   final String orderNotes;
+  
 
   OrderData({
     required this.itemdata,
@@ -20,6 +21,7 @@ class OrderData {
       price: itemdata.price * quantity,
       quantity: quantity,
       orderNotes: orderNotes,
+     // orderId: DateTime.now().millisecondsSinceEpoch.toString(),
     );
   }
  
@@ -38,7 +40,6 @@ class OrderData {
       'payment':false,
       'orderStatus': 'pending',
       'orderDate': DateTime.now().toIso8601String(),
-      'orderId': DateTime.now().millisecondsSinceEpoch.toString(),
       'userId': AuthServicess().currentUser?.uid ?? '',
       'userEmail': AuthServicess().currentUser?.email ?? '',
     };

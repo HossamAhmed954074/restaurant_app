@@ -58,7 +58,7 @@ class _PromotionalBannerWidgetState extends State<PromotionalBannerWidget>
                 // Handle banner tap
               },
               child: Container(
-                height: 130,
+                height: 150,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -124,8 +124,7 @@ class _PromotionalBannerWidgetState extends State<PromotionalBannerWidget>
                                   ),
                                 ),
 
-                                const SizedBox(height: 1),
-
+                               
                                 Text(
                                   'Special Offer',
                                   style: GoogleFonts.poppins(
@@ -135,7 +134,7 @@ class _PromotionalBannerWidgetState extends State<PromotionalBannerWidget>
                                   ),
                                 ),
 
-                                const SizedBox(height: 1),
+                               
 
                                 Text(
                                   'Get discount for every\norder, only valid for today',
@@ -147,7 +146,7 @@ class _PromotionalBannerWidgetState extends State<PromotionalBannerWidget>
                                   ),
                                 ),
 
-                                const SizedBox(height: 4),
+                               
 
                                 Container(
                                   padding: const EdgeInsets.symmetric(

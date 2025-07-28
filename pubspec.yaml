@@ -51,6 +51,7 @@ dependencies:
   google_fonts: ^6.2.1
   meta: ^1.16.0
   add_to_cart_animation: ^2.0.4
+  flutter_slidable: ^4.0.0
 
 dev_dependencies:
   flutter_test:

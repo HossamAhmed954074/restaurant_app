@@ -119,7 +119,8 @@ class _EnhancedMenuItemCardState extends State<EnhancedMenuItemCard>
                         topRight: Radius.circular(20),
                       ),
                       child: CachedNetworkImage(
-                        imageUrl:'https://drive.google.com/uc?export=view&id=${widget.item.imageCategory}',
+                        imageUrl:
+                            'https://drive.google.com/uc?export=view&id=${widget.item.imageCategory}',
                         fit: BoxFit.contain,
                         width: double.infinity,
                         height: 120,
@@ -183,7 +184,7 @@ class _EnhancedMenuItemCardState extends State<EnhancedMenuItemCard>
 
           // Content Section
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Padding(
               padding: const EdgeInsets.all(6),
               child: Column(
@@ -201,8 +202,6 @@ class _EnhancedMenuItemCardState extends State<EnhancedMenuItemCard>
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-
-                  const SizedBox(height: 1),
 
                   // Description
                   Text(
@@ -292,7 +291,8 @@ class _EnhancedMenuItemCardState extends State<EnhancedMenuItemCard>
                       bottomLeft: Radius.circular(20),
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: 'https://drive.google.com/uc?export=view&id=${widget.item.imageCategory}',
+                      imageUrl:
+                          'https://drive.google.com/uc?export=view&id=${widget.item.imageCategory}',
                       fit: BoxFit.contain,
                       width: 120,
                       height: 120,
