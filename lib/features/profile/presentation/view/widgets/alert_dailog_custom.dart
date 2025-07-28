@@ -6,7 +6,6 @@ import 'package:resturant_app/core/utils/widgets/show_snak_sucess.dart';
 import 'package:resturant_app/features/auth/view/widgets/text_field_custom.dart';
 import 'package:resturant_app/features/profile/presentation/view_model/cubit/profile_cubit.dart';
 
-
 class AlertDialogCustomWidget extends StatefulWidget {
   const AlertDialogCustomWidget({super.key});
 
@@ -21,7 +20,6 @@ class _AlertDialogCustomWidgetState extends State<AlertDialogCustomWidget> {
   final TextEditingController _newPasswordController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
 
   resetPasswordWithEmail() {
     BlocProvider.of<ProfileCubit>(context).resetPasswordWithEmail(
@@ -44,10 +42,10 @@ class _AlertDialogCustomWidgetState extends State<AlertDialogCustomWidget> {
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
-        if (state is ProfileReSetPassowrdFailure) {
+        if (state is ProfileResetPasswordFailure) {
           showSnakBarFaluire(context, state.message.userFriendlyMessage);
         }
-        if (state is ProfileResetPassowrdSuccess) {
+        if (state is ProfileResetPasswordSuccess) {
           showSnakBarSuccess(context, 'Password changed successfully');
           Navigator.pop(context);
         }
@@ -59,7 +57,10 @@ class _AlertDialogCustomWidgetState extends State<AlertDialogCustomWidget> {
               backgroundColor: Colors.blueAccent,
               title: Text(
                 'Change Password',
-                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               content: Form(
                 key: _formKey,
@@ -93,11 +94,9 @@ class _AlertDialogCustomWidgetState extends State<AlertDialogCustomWidget> {
                         SizedBox(width: 10),
                         ElevatedButton(
                           onPressed: () {
-                            if(_formKey.currentState!.validate()){
-                               resetPasswordWithEmail();
+                            if (_formKey.currentState!.validate()) {
+                              resetPasswordWithEmail();
                             }
-
-                           
                           },
                           child: Text('Change'),
                         ),
@@ -107,8 +106,8 @@ class _AlertDialogCustomWidgetState extends State<AlertDialogCustomWidget> {
                 ),
               ),
             ),
-             if (state is ProfileReSetPassowrdLoading)
-                circleIndeactorCustom(context),
+            if (state is ProfileResetPasswordLoading)
+              circleIndeactorCustom(context),
           ],
         );
       },

@@ -6,11 +6,9 @@ class DataServices {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
- 
   CollectionReference<Map<String, dynamic>> get _menuItemsCollection =>
       _firestore.collection(_collectionName);
 
- 
   Future<QuerySnapshot<Map<String, dynamic>>> getCategories() async {
     try {
       log('Fetching all categories', name: 'DataServices');
@@ -26,7 +24,6 @@ class DataServices {
       rethrow;
     }
   }
-
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getCategoriesById(
     String id,
@@ -66,12 +63,8 @@ class DataServices {
 
       for (final QueryDocumentSnapshot<Map<String, dynamic>> doc
           in querySnapshot.docs) {
-        final Map<String, dynamic>? data = doc.data();
-        if (data != null) {
-          items.add(data);
-        } else {
-          log('Null data found for document: ${doc.id}', name: 'DataServices');
-        }
+        final Map<String, dynamic> data = doc.data();
+        items.add(data);
       }
 
       items.shuffle();

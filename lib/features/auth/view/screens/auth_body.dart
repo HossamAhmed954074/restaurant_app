@@ -26,60 +26,173 @@ class _AuthBodyState extends State<AuthBody>
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width > 600;
+
     return Stack(
       children: [
-        Container(
+        // Background Image
+        _buildBackgroundImage(),
+
+        // Overlay
+        _buildOverlay(),
+
+        // Main Content
+        _buildMainContent(context, size, isTablet),
+      ],
+    );
+  }
+
+  Widget _buildBackgroundImage() {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.imagesAuth),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOverlay() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.black.withValues(alpha: 0.3),
+            Colors.black.withValues(alpha: 0.6),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMainContent(BuildContext context, Size size, bool isTablet) {
+    return Center(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: isTablet ? size.width * 0.1 : 20,
+          vertical: 20,
+        ),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: isTablet ? 500 : double.infinity,
+            minHeight: size.height * 0.6,
+          ),
+          child: _buildAuthContainer(context, size, isTablet),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAuthContainer(BuildContext context, Size size, bool isTablet) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(24),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(Assets.imagesAuth),
-              fit: BoxFit.fill,
+            color: Colors.white.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.2),
+              width: 1.5,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.1),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Header with app branding
+              _buildHeader(context),
+
+              // Tab Bar
+              TabBarCustomWidget(tabController: _tabController),
+
+              // Tab Content
+              _buildTabContent(size, isTablet),
+            ],
           ),
         ),
-        Container(color: Colors.grey.withAlpha(-200)),
-        Center(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-              child: Container(
-                height: 400,
-                width: 300,
-                decoration: BoxDecoration(
-                  color: Colors.black12.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.brown.withOpacity(0.6),
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  
-                  children: [
-                    TabBarCustomWidget(tabController: _tabController),
-                    Expanded(
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          LoginBody(),
-                          RegisterBody(),
-                          RessetPassord(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+      child: Column(
+        children: [
+          // App Icon or Logo
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.3),
+                width: 1,
               ),
             ),
+            child: const Icon(
+              Icons.restaurant_menu,
+              color: Colors.white,
+              size: 30,
+            ),
           ),
-        ),
-      ],
+          const SizedBox(height: 16),
+
+          // Welcome Text
+          const Text(
+            'Welcome',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Sign in to your account or create a new one',
+            style: TextStyle(
+              color: Colors.white.withValues(alpha: 0.8),
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabContent(Size size, bool isTablet) {
+    return SizedBox(
+      height: isTablet ? 400 : size.height * 0.45,
+      child: TabBarView(
+        controller: _tabController,
+        children: [
+          LoginBody(onSwitchToResetPassword: () => _tabController.animateTo(2)),
+          RegisterBody(onSwitchToLogin: () => _tabController.animateTo(0)),
+          RessetPassord(onBackToLogin: () => _tabController.animateTo(0)),
+        ],
+      ),
     );
   }
 }

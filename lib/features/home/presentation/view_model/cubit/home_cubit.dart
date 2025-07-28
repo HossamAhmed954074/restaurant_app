@@ -20,12 +20,12 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       final categorySnapshot = await dataServices.getCategoriesById(id);
 
-      if (categorySnapshot == null || !categorySnapshot.exists) {
+      if (!categorySnapshot.exists) {
         emit(HomeLoaded(<Itemdata>{}));
         return;
       }
 
-      final categoryData = categorySnapshot.data() as Map<String, dynamic>?;
+      final categoryData = categorySnapshot.data();
       final Map<String, dynamic>? items =
           categoryData?['items'] as Map<String, dynamic>?;
 

@@ -23,7 +23,7 @@ class AddToCartCustomButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 4,
-        shadowColor: Colors.green.withOpacity(0.3),
+        shadowColor: Colors.green.withValues(alpha: 0.3),
       ),
       child: isLoading
           ? const SizedBox(

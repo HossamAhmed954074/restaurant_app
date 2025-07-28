@@ -16,6 +16,24 @@ import 'package:resturant_app/features/home/data/item_data.dart';
 import 'package:resturant_app/features/onboarding/screens/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Helper class to create a listenable from a stream for GoRouter refresh
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen(
+      (dynamic _) => notifyListeners(),
+    );
+  }
+
+  late final StreamSubscription<dynamic> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
+
 /// Centralized router configuration for the restaurant app
 /// Handles navigation between onboarding, authentication, and main app screens
 class AppRouter {
@@ -40,6 +58,7 @@ class AppRouter {
       redirect: _handleRedirect,
       routes: _buildRoutes(),
       errorBuilder: (context, state) => _buildErrorScreen(state.error),
+      refreshListenable: GoRouterRefreshStream(_authService.authStateChanges),
     );
   }
 
@@ -53,7 +72,7 @@ class AppRouter {
   ) async {
     try {
       final String currentPath = state.matchedLocation;
-      log('Current path: $currentPath', name: 'AppRouter');
+      log('Redirect check - Current path: $currentPath', name: 'AppRouter');
 
       // Get onboarding status
       final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -63,36 +82,69 @@ class AppRouter {
       final User? currentUser = _authService.currentUser;
 
       log(
-        'Has seen onboarding: $hasSeenOnboarding, Current user: ${currentUser?.uid}',
+        'Redirect state - Onboarding: $hasSeenOnboarding, User: ${currentUser?.uid ?? 'null'}',
         name: 'AppRouter',
       );
 
-      // If user hasn't seen onboarding, show onboarding screen
-      if (!hasSeenOnboarding && currentPath != kOnboardingScreen) {
-        return kOnboardingScreen;
+      // Step 1: Handle onboarding flow - ONLY redirect if onboarding not seen
+      if (!hasSeenOnboarding) {
+        log(
+          'User needs onboarding, current path: $currentPath',
+          name: 'AppRouter',
+        );
+        return currentPath == kOnboardingScreen ? null : kOnboardingScreen;
       }
 
-      // If user has seen onboarding but is on onboarding screen, redirect based on auth
-      if (hasSeenOnboarding && currentPath == kOnboardingScreen) {
-        return currentUser != null ? kBottomNavBarScreen : kGetStartedScreen;
+      // Step 2: Handle authenticated users (onboarding completed)
+      if (currentUser != null) {
+        log(
+          'User is authenticated, current path: $currentPath',
+          name: 'AppRouter',
+        );
+
+        // Only redirect from auth-related screens to main app
+        if (currentPath == kOnboardingScreen ||
+            currentPath == kGetStartedScreen ||
+            currentPath == kAuthScreen) {
+          log('Redirecting authenticated user to main app', name: 'AppRouter');
+          return kBottomNavBarScreen;
+        }
+
+        // Allow all other paths for authenticated users
+        return null;
       }
 
-      // If user is authenticated but on get-started or auth screen, go to main app
-      if (currentUser != null &&
-          (currentPath == kGetStartedScreen || currentPath == kAuthScreen)) {
-        return kBottomNavBarScreen;
-      }
+      // Step 3: Handle unauthenticated users (onboarding completed)
+      log(
+        'User is not authenticated, current path: $currentPath',
+        name: 'AppRouter',
+      );
 
-      // If user is not authenticated but trying to access main app, go to get-started
-      if (currentUser == null && currentPath == kBottomNavBarScreen) {
+      // Only redirect from protected routes
+      if (currentPath == kBottomNavBarScreen ||
+          currentPath == kMenuDetailsScreen) {
+        log(
+          'Redirecting from protected route to get started',
+          name: 'AppRouter',
+        );
         return kGetStartedScreen;
       }
 
-      // No redirect needed
+      // For onboarding screen when onboarding is complete and user not authenticated
+      if (currentPath == kOnboardingScreen) {
+        log(
+          'Redirecting from completed onboarding to get started',
+          name: 'AppRouter',
+        );
+        return kGetStartedScreen;
+      }
+
+      // Allow access to get-started and auth screens
+      log('No redirect needed for path: $currentPath', name: 'AppRouter');
       return null;
     } catch (e) {
       log('Error in redirect logic: $e', name: 'AppRouter');
-      return kOnboardingScreen; // Safe fallback
+      return null; // Don't redirect on error to prevent loops
     }
   }
 
@@ -131,7 +183,7 @@ class AppRouter {
       GoRoute(
         path: kBottomNavBarScreen,
         name: 'main-app',
-        builder: (context, state) => const BottomNav(),
+        builder: (context, state) => const BottomNavBar(),
       ),
     ];
   }
@@ -179,14 +231,27 @@ class AppRouter {
     );
   }
 
-  /// Marks onboarding as completed
-  static Future<void> completeOnboarding() async {
+  /// Marks onboarding as completed and navigates to get started screen
+  static Future<void> completeOnboarding(BuildContext context) async {
     try {
+      log('Completing onboarding...', name: 'AppRouter');
+
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool(_onboardingKey, true);
-      log('Onboarding marked as completed', name: 'AppRouter');
+
+      log('Onboarding marked as complete', name: 'AppRouter');
+
+      // Use pushReplacement to prevent going back to onboarding
+      if (context.mounted) {
+        log('Navigating to get started screen...', name: 'AppRouter');
+        context.pushReplacement(kGetStartedScreen);
+      }
     } catch (e) {
-      log('Error marking onboarding as completed: $e', name: 'AppRouter');
+      log('Error completing onboarding: $e', name: 'AppRouter');
+      // Fallback navigation
+      if (context.mounted) {
+        context.go(kGetStartedScreen);
+      }
     }
   }
 
